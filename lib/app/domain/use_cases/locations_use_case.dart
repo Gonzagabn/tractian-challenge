@@ -2,7 +2,7 @@ import 'package:tractian_challenge/app/data/repositories/locations_repository.da
 import 'package:tractian_challenge/app/domain/models/location.dart';
 
 interface class ILocationsUseCase {
-  Future<LocationModel> getLocations() async => LocationModel();
+  Future<LocationModel> getLocations(String companyId) async => LocationModel();
 }
 
 class LocationsUseCase implements ILocationsUseCase {
@@ -13,12 +13,12 @@ class LocationsUseCase implements ILocationsUseCase {
   });
 
   @override
-  Future<LocationModel> getLocations() async {
+  Future<LocationModel> getLocations(String companyId) async {
     try {
-      final Map<String, dynamic>? response =
-          await locationsRepository.getLocations();
+      final List<dynamic> response =
+          await locationsRepository.getLocations(companyId);
 
-      return LocationModel.fromJson([response]);
+      return LocationModel.fromJson(response);
     } catch (error) {
       throw Exception('LocationsUseCase: getLocations $error');
     }

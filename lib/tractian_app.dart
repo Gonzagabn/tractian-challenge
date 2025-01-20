@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tractian_challenge/app/core/router/router.dart';
+import 'package:tractian_challenge/app/utils/themes/colors.dart';
 
 class TractianApp extends StatefulWidget {
   const TractianApp({super.key});
@@ -24,6 +25,11 @@ class _TractianAppState extends State<TractianApp> {
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: true,
       routerConfig: _routerConfig,
+      theme: ThemeData(
+        useMaterial3: true,
+        primaryColor: AppColors.darkBlue,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.darkBlue),
+      ),
     );
   }
 }

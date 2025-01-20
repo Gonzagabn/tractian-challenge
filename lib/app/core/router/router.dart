@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tractian_challenge/app/presentation/screens/assets%20copy/assets_screen.dart';
-import 'package:tractian_challenge/app/presentation/screens/companies%20copy/companies_screen.dart';
+import 'package:tractian_challenge/app/presentation/screens/assets/assets_screen.dart';
 import 'package:tractian_challenge/app/presentation/screens/home/home_screen.dart';
-import 'package:tractian_challenge/app/presentation/screens/locations/locations_screen.dart';
 
 part './routes.dart';
 
@@ -27,19 +25,7 @@ abstract class AppRouter {
               path: RouteNames.assets,
               name: RouteNames.assets,
               builder: (BuildContext context, GoRouterState state) =>
-                  AssetsScreen(),
-            ),
-            GoRoute(
-              path: RouteNames.companies,
-              name: RouteNames.companies,
-              builder: (BuildContext context, GoRouterState state) =>
-                  CompaniesScreen(),
-            ),
-            GoRoute(
-              path: RouteNames.locations,
-              name: RouteNames.locations,
-              builder: (BuildContext context, GoRouterState state) =>
-                  LocationsScreen(),
+                  AssetsScreen(queryParameters: state.uri.queryParameters),
             ),
           ],
         ),

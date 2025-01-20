@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tractian_challenge/app/utils/resources/spacing.dart';
 
 class LoadingContainer extends StatelessWidget {
   final Widget? child;
@@ -12,7 +13,7 @@ class LoadingContainer extends StatelessWidget {
     this.child,
     this.height,
     this.width,
-    this.borderRadius = 8.0,
+    this.borderRadius = SpacingValue.xxxs,
   });
 
   @override

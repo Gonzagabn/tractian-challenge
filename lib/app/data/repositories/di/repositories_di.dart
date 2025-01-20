@@ -14,12 +14,14 @@ class RepositoriesDI implements IBaseDI {
       ),
       fenix: true,
     );
+
     Get.lazyPut<ILocationsRepository>(
       () => LocationsRepository(
         client: Get.find<IRestClient>(),
       ),
       fenix: true,
     );
+
     Get.lazyPut<IAssetsRepository>(
       () => AssetsRepository(
         client: Get.find<IRestClient>(),

@@ -4,66 +4,35 @@ LocationModel locationModelFromJson(String str) =>
     LocationModel.fromJson(json.decode(str));
 
 class LocationModel {
-  final List<Billboard?> items;
+  final List<Location> items;
 
   LocationModel({
     this.items = const [],
   });
 
-  factory LocationModel.fromJson(List<Map<String, dynamic>?> jsonList) =>
-      LocationModel(
-        items: List<Billboard?>.from(
-            jsonList.map((billboard) => Billboard.fromJson(billboard ?? {}))),
+  factory LocationModel.fromJson(List<dynamic> jsonList) => LocationModel(
+        items: List<Location>.from(
+          jsonList.map(
+            (location) => Location.fromJson(location),
+          ),
+        ),
       );
 }
 
-class Billboard {
-  String? id;
-  String? title;
-  String? description;
-  String? imageUrl;
-  bool editMode;
+class Location {
+  String id;
+  String name;
+  String? parentId;
 
-  Billboard({
-    this.id,
-    this.title,
-    this.description,
-    this.imageUrl,
-    this.editMode = false,
+  Location({
+    required this.id,
+    required this.name,
+    this.parentId,
   });
 
-  static Billboard newBillboard() => Billboard(
-        title: 'Título',
-        description: 'Descrição',
-      );
-
-  factory Billboard.fromJson(Map<String, dynamic> json) => Billboard(
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
         id: json["id"],
-        title: json["title"],
-        description: json["description"],
-        imageUrl: json["imageUrl"],
+        name: json["name"],
+        parentId: json["parentId"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "title": title,
-        "description": description,
-        "imageUrl": imageUrl,
-      };
-
-  factory Billboard.fromQueryParameters(Map<String, dynamic>? json) =>
-      Billboard(
-        id: json?["id"],
-        title: json?["title"],
-        description: json?["description"],
-        imageUrl: json?["imageUrl"],
-        editMode: json?["editMode"] == 'true',
-      );
-
-  Map<String, String> toQueryParameters() => {
-        "id": id ?? '',
-        "title": title ?? '',
-        "description": description ?? '',
-        "imageUrl": imageUrl ?? '',
-        "editMode": editMode.toString(),
-      };
 }

@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:tractian_challenge/app/core/base/base_repository.dart';
 
 interface class ICompaniesRepository {
-  Future<Map<String, dynamic>?> getCompanies() async => null;
+  Future<List<dynamic>> getCompanies() async => [];
 }
 
 final class CompaniesRepository extends IBaseRepository
@@ -9,10 +11,13 @@ final class CompaniesRepository extends IBaseRepository
   CompaniesRepository({required super.client});
 
   @override
-  Future<Map<String, dynamic>?> getCompanies() async {
+  Future<List<dynamic>> getCompanies() async {
     try {
-      final Map<String, dynamic>? data = {};
-      return data;
+      final String data = await client.get(
+        url: "https://fake-api.tractian.com/companies",
+      );
+
+      return jsonDecode(data);
     } catch (error) {
       throw Exception('CompaniesRepository: getCompanies $error');
     }

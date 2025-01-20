@@ -2,7 +2,7 @@ import 'package:tractian_challenge/app/data/repositories/assets_repository.dart'
 import 'package:tractian_challenge/app/domain/models/asset.dart';
 
 interface class IAssetsUseCase {
-  Future<AssetModel> getAssets() async => AssetModel();
+  Future<AssetModel> getAssets(String companyId) async => AssetModel();
 }
 
 class AssetsUseCase implements IAssetsUseCase {
@@ -13,11 +13,12 @@ class AssetsUseCase implements IAssetsUseCase {
   });
 
   @override
-  Future<AssetModel> getAssets() async {
+  Future<AssetModel> getAssets(String companyId) async {
     try {
-      final Map<String, dynamic>? response = await assetsRepository.getAssets();
+      final List<dynamic> response =
+          await assetsRepository.getAssets(companyId);
 
-      return AssetModel.fromJson([response]);
+      return AssetModel.fromJson(response);
     } catch (error) {
       throw Exception('AssetsUseCase: getAssets $error');
     }

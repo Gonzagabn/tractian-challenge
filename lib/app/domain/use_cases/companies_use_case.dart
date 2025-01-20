@@ -15,10 +15,9 @@ class CompaniesUseCase implements ICompaniesUseCase {
   @override
   Future<CompanyModel> getCompanies() async {
     try {
-      final Map<String, dynamic>? response =
-          await companiesRepository.getCompanies();
+      final List<dynamic> response = await companiesRepository.getCompanies();
 
-      return CompanyModel.fromJson([response]);
+      return CompanyModel.fromJson(response);
     } catch (error) {
       throw Exception('CompaniesUseCase: getCompanies $error');
     }
