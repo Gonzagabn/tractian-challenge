@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:tractian_challenge/app/domain/models/element.dart';
+
 AssetModel assetModelFromJson(String str) =>
     AssetModel.fromJson(json.decode(str));
 
@@ -19,30 +21,25 @@ class AssetModel {
       );
 }
 
-class Asset {
-  String id;
-  String name;
-  String? parentId;
-  String? sensorId;
-  String? sensorType;
-  String? status;
-  String? gatewayId;
-  String? locationId;
-
+class Asset extends ElementModel {
   Asset({
-    required this.id,
-    required this.name,
-    this.parentId,
-    this.sensorId,
-    this.sensorType,
-    this.status,
-    this.gatewayId,
-    this.locationId,
+    required super.id,
+    required super.name,
+    required super.type,
+    super.parentId,
+    super.sensorId,
+    super.sensorType,
+    super.status,
+    super.gatewayId,
+    super.locationId,
   });
 
   factory Asset.fromJson(Map<String, dynamic> json) => Asset(
         id: json["id"],
         name: json["name"],
+        type: json["sensorType"] == null
+            ? ElementType.asset
+            : ElementType.component,
         parentId: json["parentId"],
         sensorId: json["sensorId"],
         sensorType: json["sensorType"],

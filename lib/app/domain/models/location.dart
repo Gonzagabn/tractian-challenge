@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:tractian_challenge/app/domain/models/element.dart';
+
 LocationModel locationModelFromJson(String str) =>
     LocationModel.fromJson(json.decode(str));
 
@@ -19,20 +21,18 @@ class LocationModel {
       );
 }
 
-class Location {
-  String id;
-  String name;
-  String? parentId;
-
+class Location extends ElementModel {
   Location({
-    required this.id,
-    required this.name,
-    this.parentId,
+    required super.id,
+    required super.name,
+    required super.type,
+    super.parentId,
   });
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
         id: json["id"],
         name: json["name"],
+        type: ElementType.location,
         parentId: json["parentId"],
       );
 }

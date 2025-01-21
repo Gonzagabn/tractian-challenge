@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tractian_challenge/app/domain/models/company.dart';
 import 'package:tractian_challenge/app/presentation/screens/assets/assets_controller.dart';
+import 'package:tractian_challenge/app/presentation/screens/assets/widgets/node_list_view.dart';
 import 'package:tractian_challenge/app/utils/constants/icons.dart';
 import 'package:tractian_challenge/app/utils/resources/spacing.dart';
 import 'package:tractian_challenge/app/utils/themes/colors.dart';
@@ -88,7 +89,12 @@ class _AssetsScreenState extends State<AssetsScreen> {
                       vertical: SpacingValue.md,
                       horizontal: SpacingValue.sm,
                     ),
-                    child: Text("algo aqui"),
+                    child: Obx(
+                      () => controller.loadingData.value
+                          ? SizedBox()
+                          : NodeListView(
+                              nodes: controller.processedData.value.children),
+                    ),
                   ),
                 ),
               ),
